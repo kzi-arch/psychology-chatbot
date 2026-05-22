@@ -72,3 +72,6 @@ logs/
 data/vectorstore/
 data/conversations/
 empathai_chat_*.txt
+
+# Streamlit Secrets
+.streamlit/secrets.toml
