@@ -11,6 +11,7 @@ from src.core.chatbot import PsychologyChatbot
 from src.config.settings import settings
 from src.config.prompts import PERSONAS
 from src.utils.chat_storage import ChatStorage
+from src.utils.feedback import FeedbackManager
 from datetime import datetime
 
 # ====================== CONFIG ======================
@@ -45,6 +46,9 @@ if "messages" not in st.session_state:
 
 if "chat_storage" not in st.session_state:
     st.session_state.chat_storage = ChatStorage()
+
+if "feedback_manager" not in st.session_state:
+    st.session_state.feedback_manager = FeedbackManager()
 
 # ====================== SIDEBAR ======================
 with st.sidebar:
@@ -139,11 +143,40 @@ with st.sidebar:
 st.title("💬 EmpathAI")
 st.markdown("**Hai, aku di sini. Ceritakan apa yang kamu rasakan.**")
 
-# Tampilkan pesan
-for message in st.session_state.messages:
+# Tampilkan pesan + Feedback
+for idx, message in enumerate(st.session_state.messages):
     avatar = "👤" if message["role"] == "user" else "🧠"
     with st.chat_message(message["role"], avatar=avatar):
         st.markdown(message["content"])
+        
+        # Tambah feedback hanya untuk jawaban bot
+        if message["role"] == "assistant" and idx > 0:
+            col1, col2, col3 = st.columns([1, 1, 4])
+            with col1:
+                if st.button("👍", key=f"like_{idx}"):
+                    st.session_state.chat_storage.feedback_manager.save_feedback(
+                        message_index=idx,
+                        user_message=st.session_state.messages[idx-1]["content"],
+                        bot_response=message["content"],
+                        rating=1
+                    )
+                    st.success("Terima kasih atas feedbacknya!")
+                    st.rerun()
+            
+            with col2:
+                if st.button("👎", key=f"dislike_{idx}"):
+                    comment = st.text_input("Kenapa tidak suka? (opsional)", 
+                                          key=f"comment_{idx}")
+                    if st.button("Kirim", key=f"submit_{idx}"):
+                        st.session_state.chat_storage.feedback_manager.save_feedback(
+                            message_index=idx,
+                            user_message=st.session_state.messages[idx-1]["content"],
+                            bot_response=message["content"],
+                            rating=0,
+                            comment=comment
+                        )
+                        st.success("Feedback diterima. Terima kasih!")
+                        st.rerun()
 
 # Input Chat
 if prompt := st.chat_input("Ketik pesanmu di sini..."):
@@ -159,6 +192,9 @@ if prompt := st.chat_input("Ketik pesanmu di sini..."):
             st.markdown(response)
     
     st.session_state.messages.append({"role": "assistant", "content": response})
+    
+    # Refresh agar tombol feedback otomatis muncul di pesan baru
+    st.rerun()
 
 # Footer
 st.divider()

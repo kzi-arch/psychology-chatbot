@@ -2,11 +2,13 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
+from src.utils.feedback import FeedbackManager
 
 class ChatStorage:
     def __init__(self):
         self.data_dir = Path("data/conversations")
         self.data_dir.mkdir(parents=True, exist_ok=True)
+        self.feedback_manager = FeedbackManager()   # ← Tambahkan ini
 
     def save_chat(self, messages: list, title: str = None) -> str:
         """Simpan chat ke file JSON"""
