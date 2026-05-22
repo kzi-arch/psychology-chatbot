@@ -1,18 +1,33 @@
 from google import genai
 from google.genai import types
 from src.config.settings import settings
-from src.config.prompts import SYSTEM_PROMPT, SAFETY_REMINDER, RAG_PROMPT_TEMPLATE
+from src.config.prompts import PERSONAS, SAFETY_REMINDER, RAG_PROMPT_TEMPLATE
 from src.core.safety import SafetyGuard
 from src.core.memory import ConversationMemory
 from src.psychology.knowledge_base import PsychologyKnowledgeBase
 
 class PsychologyChatbot:
-    def __init__(self):
+    def __init__(self, persona_key: str = "empat"):
         self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
         self.safety = SafetyGuard()
         self.memory = ConversationMemory()
         self.knowledge_base = PsychologyKnowledgeBase()
+        self.current_persona = persona_key
         self.history = []
+
+    def set_persona(self, persona_key: str):
+        """Ganti persona"""
+        if persona_key in PERSONAS:
+            self.current_persona = persona_key
+            self.history = []  # Reset history saat ganti persona
+            self.memory.summary = ""
+            return True
+        return False
+
+    def clear_history(self):
+        """Hapus riwayat percakapan dan ringkasan memori"""
+        self.history = []
+        self.memory.summary = ""
 
     def get_response(self, user_message: str) -> str:
         # Safety Check
@@ -20,22 +35,23 @@ class PsychologyChatbot:
         if not is_safe:
             return safety_message
 
-        # Retrieve knowledge
-        retrieved_docs = self.knowledge_base.retrieve(user_message, k=4)
-        context = "\n\n---\n\n".join(retrieved_docs) if retrieved_docs else "Tidak ada konteks tambahan."
+        # RAG Retrieval
+        retrieved_docs = self.knowledge_base.retrieve(user_message, k=settings.RAG_K)
+        context = "\n\n---\n\n".join(retrieved_docs) if retrieved_docs else ""
 
-        # Tambah ke history
-        self.history.append({"role": "user", "parts": [{"text": user_message}]})
+        # Persona Prompt
+        persona_prompt = PERSONAS[self.current_persona]["prompt"]
 
-        # Bangun system instruction
-        system_instruction = f"""{SYSTEM_PROMPT}
+        system_instruction = f"""{persona_prompt}
 {SAFETY_REMINDER}
 
-{RAG_PROMPT_TEMPLATE.format(context=context)}
+{RAG_PROMPT_TEMPLATE.format(context=context) if context else ""}
 """
 
         if self.memory.summary:
-            system_instruction += f"\n\nRingkasan percakapan sebelumnya:\n{self.memory.summary}"
+            system_instruction += f"\n\nRingkasan percakapan: {self.memory.summary}"
+
+        self.history.append({"role": "user", "parts": [{"text": user_message}]})
 
         try:
             response = self.client.models.generate_content(
@@ -48,16 +64,14 @@ class PsychologyChatbot:
                 )
             )
 
-            bot_reply = response.text
-
+            bot_reply = response.text.strip()
             self.history.append({"role": "model", "parts": [{"text": bot_reply}]})
 
-            # Auto summary
-            if len(self.history) > 12:
+            if len(self.history) > 10:
                 self.memory.summarize_conversation(self.history)
 
             return bot_reply
 
         except Exception as e:
-            print(f"Error memanggil Gemini API: {e}")
-            return "Maaf, aku sedang mengalami gangguan. Coba lagi ya? 😊"
+            print(f"Error Gemini API: {e}")
+            return "Maaf, ada gangguan teknis. Coba lagi ya? 😊"

@@ -9,6 +9,7 @@ if root_dir not in sys.path:
 import streamlit as st
 from src.core.chatbot import PsychologyChatbot
 from src.config.settings import settings
+from src.config.prompts import PERSONAS
 from src.utils.chat_storage import ChatStorage
 from datetime import datetime
 
@@ -49,6 +50,25 @@ if "chat_storage" not in st.session_state:
 with st.sidebar:
     st.title("🧠 EmpathAI")
     st.caption("Teman Curhat Psikologi")
+
+    # Persona Selector
+    st.write("**Pilih Teman Curhat**")
+    persona_options = {f"{p['emoji']} {p['name']}" : key for key, p in PERSONAS.items()}
+    
+    selected_persona_label = st.selectbox(
+        "Persona",
+        options=list(persona_options.keys()),
+        index=0  # default = Empath
+    )
+    
+    selected_persona_key = persona_options[selected_persona_label]
+
+    # Update persona jika berubah
+    if "current_persona" not in st.session_state or st.session_state.current_persona != selected_persona_key:
+        st.session_state.current_persona = selected_persona_key
+        if "chatbot" in st.session_state:
+            st.session_state.chatbot.set_persona(selected_persona_key)
+        st.rerun()
 
     st.divider()
 
