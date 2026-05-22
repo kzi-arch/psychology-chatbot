@@ -13,3 +13,4 @@ langchain-google-genai>=4.2.3
 langchain-text-splitters
 langchain-chroma
 streamlit>=1.57.0
+pysqlite3-binary

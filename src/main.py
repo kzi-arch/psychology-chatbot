@@ -1,6 +1,14 @@
 import sys
 from pathlib import Path
 
+# --- WORKAROUND UNTUK CHROMADB DI STREAMLIT CLOUD ---
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
+
 # Tambahkan direktori root (satu tingkat di atas 'src') ke sys.path
 root_dir = str(Path(__file__).resolve().parent.parent)
 if root_dir not in sys.path:
