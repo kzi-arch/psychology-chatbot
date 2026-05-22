@@ -187,21 +187,25 @@ for idx, message in enumerate(st.session_state.messages):
 
 # Input Chat
 if prompt := st.chat_input("Ketik pesanmu di sini..."):
-    # User message
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user", avatar="👤"):
-        st.markdown(prompt)
+    # Rate limit check di UI
+    can_proceed, msg = st.session_state.chatbot.rate_limiter.can_make_request()
+    if not can_proceed:
+        st.warning(msg)
+    else:
+        # Lanjutkan seperti biasa
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user", avatar="👤"):
+            st.markdown(prompt)
 
-    # Bot response
-    with st.chat_message("assistant", avatar="🧠"):
-        with st.spinner("EmpathAI sedang mendengarkan..."):
-            response = st.session_state.chatbot.get_response(prompt)
-            st.markdown(response)
-    
-    st.session_state.messages.append({"role": "assistant", "content": response})
-    
-    # Refresh agar tombol feedback otomatis muncul di pesan baru
-    st.rerun()
+        with st.chat_message("assistant", avatar="🧠"):
+            with st.spinner("EmpathAI sedang berpikir..."):
+                response = st.session_state.chatbot.get_response(prompt)
+                st.markdown(response)
+        
+        st.session_state.messages.append({"role": "assistant", "content": response})
+        
+        # Refresh agar tombol feedback otomatis muncul di pesan baru
+        st.rerun()
 
 # Footer
 st.divider()

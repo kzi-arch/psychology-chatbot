@@ -5,6 +5,8 @@ from src.config.prompts import PERSONAS, SAFETY_REMINDER, RAG_PROMPT_TEMPLATE
 from src.core.safety import SafetyGuard
 from src.core.memory import ConversationMemory
 from src.psychology.knowledge_base import PsychologyKnowledgeBase
+from src.utils.logging import AppLogger
+from src.core.rate_limiter import RateLimiter
 
 class PsychologyChatbot:
     def __init__(self, persona_key: str = "empat"):
@@ -12,6 +14,8 @@ class PsychologyChatbot:
         self.safety = SafetyGuard()
         self.memory = ConversationMemory()
         self.knowledge_base = PsychologyKnowledgeBase()
+        self.logger = AppLogger()
+        self.rate_limiter = RateLimiter(max_requests=15, time_window=60)  # 15 pesan per menit
         self.current_persona = persona_key
         self.history = []
 
@@ -29,7 +33,12 @@ class PsychologyChatbot:
         self.history = []
         self.memory.summary = ""
 
-    def get_response(self, user_message: str) -> str:
+    def get_response(self, user_message: str, user_id: str = "default") -> str:
+        # Rate Limiting Check
+        can_proceed, limit_message = self.rate_limiter.can_make_request(user_id)
+        if not can_proceed:
+            return limit_message
+
         # Safety Check
         is_safe, safety_message = self.safety.get_safety_response(user_message)
         if not is_safe:
@@ -60,6 +69,17 @@ Pastikan gaya bahasa, nada bicara, dan pendekatanmu BENAR-BENAR mencerminkan per
         self.history.append({"role": "user", "parts": [{"text": user_message}]})
 
         try:
+            # Log interaksi
+            self.logger.log_interaction(
+                user_id=user_id,
+                action="generate_response",
+                details={
+                    "persona": self.current_persona,
+                    "message_length": len(user_message),
+                    "history_length": len(self.history)
+                }
+            )
+
             response = self.client.models.generate_content(
                 model=settings.GEMINI_MODEL,
                 contents=self.history,
@@ -79,5 +99,5 @@ Pastikan gaya bahasa, nada bicara, dan pendekatanmu BENAR-BENAR mencerminkan per
             return bot_reply
 
         except Exception as e:
-            print(f"Error Gemini API: {e}")
-            return "Maaf, ada gangguan teknis. Coba lagi ya? 😊"
+            self.logger.log_error(e, context="generate_content")
+            return "Maaf, sedang ada gangguan. Coba lagi sebentar ya."
