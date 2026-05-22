@@ -40,9 +40,15 @@ class PsychologyChatbot:
         context = "\n\n---\n\n".join(retrieved_docs) if retrieved_docs else ""
 
         # Persona Prompt
-        persona_prompt = PERSONAS[self.current_persona]["prompt"]
+        persona_info = PERSONAS[self.current_persona]
+        persona_prompt = persona_info["prompt"]
+        persona_name = persona_info["name"]
 
         system_instruction = f"""{persona_prompt}
+
+PENTING: Kamu saat ini sedang berperan sebagai persona "{persona_name}".
+Pastikan gaya bahasa, nada bicara, dan pendekatanmu BENAR-BENAR mencerminkan persona ini dari awal sampai akhir!
+
 {SAFETY_REMINDER}
 
 {RAG_PROMPT_TEMPLATE.format(context=context) if context else ""}

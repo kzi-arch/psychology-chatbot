@@ -68,6 +68,7 @@ with st.sidebar:
         st.session_state.current_persona = selected_persona_key
         if "chatbot" in st.session_state:
             st.session_state.chatbot.set_persona(selected_persona_key)
+            st.session_state.messages = []  # Sinkronisasi: hapus chat di layar saat ganti persona
         st.rerun()
 
     st.divider()
