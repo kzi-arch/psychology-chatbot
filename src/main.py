@@ -145,7 +145,6 @@ with st.sidebar:
         st.caption("Belum ada chat tersimpan.")
 
     st.divider()
-    st.caption(f"Model: {settings.GEMINI_MODEL}")
 
 # ====================== MAIN CHAT ======================
 st.title("💬 EmpathAI")
