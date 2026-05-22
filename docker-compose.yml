@@ -1,0 +1,15 @@
+services:
+  empathai:
+    build: .
+    container_name: empathai-chatbot
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+    # Optional: untuk development (hot reload)
+    # command: uv run streamlit run src/main.py --server.port=8501 --server.address=0.0.0.0 --server.runOnSave=true
