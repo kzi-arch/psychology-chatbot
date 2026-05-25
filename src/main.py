@@ -2,6 +2,7 @@ import streamlit as st
 from src.core.chatbot import PsychologyChatbot
 from src.config.settings import settings
 from src.utils.chat_storage import ChatStorage
+from src.config.prompts import PERSONAS
 from datetime import datetime
 
 st.set_page_config(
