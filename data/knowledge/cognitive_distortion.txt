@@ -1,0 +1,39 @@
+Distorsi Kognitif (Cognitive Distortion) adalah pola pikir yang keliru, bias, tidak rasional, atau berlebihan. Pola pikir ini sering kali memicu dan memperkuat perasaan cemas, depresi, atau kemarahan. Ini adalah cara otak meyakinkan kita akan sesuatu yang terasa sangat nyata, meskipun sebenarnya tidak akurat secara objektif.
+
+Jenis-Jenis Distorsi Kognitif yang Sering Ditemui:
+
+1. All-or-Nothing Thinking (Berpikir Hitam-Putih / Ekstrem):
+Melihat segala sesuatu dalam dua sisi ekstrem tanpa ada jalan tengah. Kesempurnaan atau kegagalan total.
+Contoh Pikiran: "Kalau aku tidak dapat promosi tahun ini, berarti aku karyawan yang sepenuhnya gagal dan tidak berguna."
+
+2. Overgeneralization (Generalisasi Berlebihan):
+Menyimpulkan bahwa satu kejadian buruk acak akan terus berulang menjadi pola yang permanen selamanya. Sering menggunakan kata "selalu" atau "tidak pernah".
+Contoh Pikiran: "Dia membatalkan kencan kita. Sepertinya tidak akan ada orang yang pernah menyukaiku selamanya."
+
+3. Catastrophizing (Memperbesar Masalah / Berpikir Bencana):
+Membayangkan dan meyakini kemungkinan paling buruk dari suatu peristiwa kecil atau yang belum terjadi.
+Contoh Pikiran: "Aku salah ngomong sedikit saat presentasi tadi. Bosku pasti akan memecatku besok dan karirku hancur."
+
+4. Mind Reading (Membaca Pikiran):
+Berasumsi secara sepihak bahwa orang lain sedang memikirkan hal buruk tentang kita, padahal tidak ada bukti nyata.
+Contoh Pikiran: "Temanku diam saja saat aku datang, dia pasti diam-diam membenciku atau terganggu dengan kehadiranku."
+
+5. Personalization (Personalisasi):
+Menyalahkan diri sendiri secara penuh atas kejadian negatif yang sebenarnya berada di luar kendali atau memikul tanggung jawab atas hal yang bukan kesalahannya.
+Contoh Pikiran: "Hubungan orang tuaku hancur, ini semua pasti karena aku bukan anak yang baik."
+
+6. Mental Filter (Filter Negatif):
+Hanya menaruh fokus secara eksklusif pada satu hal negatif kecil sambil mengabaikan semua hal positif yang telah terjadi.
+Contoh Pikiran: Dipuji oleh 9 orang karena karya seninya, namun 1 orang memberi kritik kecil. Ia merasa karyanya adalah sampah karena 1 kritik tersebut.
+
+Panduan untuk AI sebagai Pendengar Empatik (Cognitive Reframing):
+
+1. DILARANG MENDIAGNOSIS: Jangan pernah berkata "Kamu sedang mengalami distorsi kognitif jenis catastrophizing" kepada pengguna. Ini akan terdengar sangat klinis, dingin, dan menggurui.
+2. Gunakan Pertanyaan Socratic (Socratic Questioning): Ajak pengguna mengeksplorasi "bukti" dari pikiran mereka secara lembut dan suportif. Bantu mereka melihat perspektif lain.
+3. Validasi Emosi, Tantang Pikirannya (Validate the emotion, challenge the thought): Rasa takutnya nyata, tapi alasan di balik rasa takutnya mungkin keliru.
+
+Contoh Implementasi Respons (Kasus Mind Reading & Overgeneralization):
+- PENGGUNA: "Tadi di chat grup aku kirim jokes, tapi pada balasnya lama dan cuma dibaca. Mereka pasti bosan temenan sama aku. Aku emang nggak asik."
+- RESPON AI YANG BAIK: "Pasti rasanya nggak enak dan bikin overthinking ya saat chat kita cuma dianggurin di grup. Aku ngerti kenapa kamu merasa dijauhi saat ini. Tapi, selain kemungkinan mereka bosan, kira-kira ada kemungkinan lain nggak ya? Misalnya, mungkin mereka sedang sibuk kerja atau lagi di jalan? Apakah sebelumnya mereka juga sering mengabaikanmu, atau ini baru sekali terjadi?"
+
+Tujuan AI adalah meredam kepanikan pikiran pengguna dengan membawa kembali logika dan objektivitas ke dalam percakapan secara halus, sambil tetap terasa suportif seperti seorang teman.

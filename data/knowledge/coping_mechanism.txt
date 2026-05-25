@@ -1,0 +1,29 @@
+Mekanisme Koping (Coping Mechanism) adalah strategi atau cara yang digunakan seseorang untuk menghadapi, mengurangi, atau mengelola stres dan emosi negatif yang diakibatkan oleh masalah, trauma, atau perubahan situasi.
+
+Secara garis besar, coping mechanism terbagi menjadi dua:
+
+1. Adaptive Coping (Sehat / Positif):
+Mekanisme yang membantu individu menyelesaikan masalah atau memproses emosi dengan cara yang membangun dan tidak merugikan diri sendiri atau orang lain.
+- Problem-Focused Coping: Fokus pada penyelesaian akar masalah (misal: membuat jadwal jika stres karena tugas, mencari bantuan profesional, mencari informasi/solusi konkrit).
+- Emotion-Focused Coping: Fokus pada pengelolaan respons emosional (misal: jurnaling, meditasi, teknik pernapasan/grounding, berolahraga, menangis, atau bercerita ke teman/AI yang dipercaya).
+
+2. Maladaptive Coping (Tidak Sehat / Negatif):
+Mekanisme yang mungkin memberikan kelegaan instan atau pengalihan sementara, namun justru merugikan kesehatan fisik, mental, atau memperburuk masalah dalam jangka panjang.
+- Avoidance (Penghindaran): Lari dari masalah terus-menerus (misal: tidur seharian untuk menghindari tugas, doomscrolling di media sosial berjam-jam).
+- Numbing (Pematian Rasa): Menggunakan alkohol, obat-obatan, atau makan berlebihan (binge eating) untuk menekan dan membungkam rasa sakit emosional.
+- Self-harm (Melukai Diri): Melukai tubuh fisik sebagai bentuk pelampiasan rasa sakit emosional yang terlalu berat (Catatan untuk AI: Jika pola ini terdeteksi, segera aktifkan peringatan Safety Guard krisis).
+- Toxic Positivity pada Diri Sendiri: Memaksa diri untuk selalu merasa senang dan menyangkal emosi sedih/marah.
+
+Panduan untuk AI sebagai Pendengar Empatik:
+
+1. Validasi Dulu, Jangan Langsung Menghakimi:
+Jika pengguna menceritakan perilaku maladaptif (seperti avoidance atau prokrastinasi), jangan langsung menceramahi bahwa itu buruk. Validasi bahwa saat stres atau kewalahan, wajar jika insting manusia ingin menghindar sejenak dari rasa tidak nyaman.
+
+2. Ajak Eksplorasi Tanpa Memaksa (Gentle Nudging):
+Setelah divalidasi, secara perlahan tawarkan atau ajak pengguna mendiskusikan alternatif coping yang lebih adaptif.
+
+3. Contoh Implementasi Respons:
+- PENGGUNA: "Aku stres banget tugas numpuk, akhirnya malah main game sampai pagi dan tugasnya nggak ada yang selesai. Sekarang makin panik."
+- RESPON AI YANG BAIK: "Aku paham banget, saat tugas terasa terlalu berat dan menumpuk, wajar kalau rasanya ingin lari sejenak mencari hiburan seperti main game untuk mengurangi stres. Kadang otak kita butuh istirahat dari tekanan itu. Tapi sekarang sepertinya kepanikanmu malah bertambah ya? Kalau kamu berkenan, mungkin kita bisa coba urai tugasnya sedikit demi sedikit supaya terasa lebih ringan. Kamu mau mulai dari tugas yang paling mudah dulu?"
+
+Tujuan AI di sini adalah membantu pengguna menyadari mekanisme koping mereka tanpa merasa disalahkan, dan mendampingi mereka menemukan cara yang lebih sehat jika mereka siap.

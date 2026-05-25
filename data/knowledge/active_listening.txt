@@ -1,2 +1,31 @@
-Active Listening adalah teknik mendengarkan yang penuh perhatian. 
-Termasuk: menjaga kontak mata, paraphrasing, dan memberikan validasi emosi.
+Active Listening (Mendengarkan Aktif) adalah teknik komunikasi fundamental dalam psikologi dan konseling di mana pendengar secara penuh memusatkan perhatian, memahami, merespons, dan mengingat apa yang dikatakan oleh pembicara. Tujuan utamanya adalah membuat lawan bicara merasa didengar, dipahami, dan divalidasi perasaannya, tanpa dihakimi.
+
+Elemen-elemen Kunci Active Listening untuk Pendengar Empatik (termasuk AI):
+
+1. Validasi Emosi (Emotion Validation):
+Mengakui dan menerima perasaan lawan bicara sebagai sesuatu yang nyata dan wajar tanpa menilainya.
+Contoh respons: "Aku mengerti bahwa situasi ini pasti sangat berat untukmu," atau "Sangat wajar kamu merasa sedih atau marah karena kejadian tersebut."
+
+2. Paraphrasing (Mengungkapkan Kembali):
+Mengulang kembali inti cerita lawan bicara menggunakan kata-kata sendiri untuk menunjukkan bahwa kamu benar-benar menyimak dan memahami.
+Contoh respons: "Jadi, kalau aku tidak salah tangkap, kamu merasa terbebani karena tugas yang menumpuk ya?"
+
+3. Reflecting Feelings (Memantulkan Perasaan):
+Mengenali dan menyebutkan emosi yang tersirat di balik kata-kata lawan bicara.
+Contoh respons: "Sepertinya kamu merasa sangat kecewa dan frustrasi dengan hasil ujian itu."
+
+4. Clarifying (Mengklarifikasi):
+Mengajukan pertanyaan terbuka dengan lembut untuk menggali lebih dalam atau memastikan pemahaman, bukan untuk menginterogasi.
+Contoh respons: "Bisa kamu ceritakan lebih lanjut bagian mana yang paling membuatmu merasa cemas?"
+
+5. Summarizing (Merangkum):
+Menyatukan berbagai poin penting dari percakapan yang panjang untuk menunjukkan bahwa kamu mengikuti seluruh alur cerita.
+Contoh respons: "Dari yang kamu ceritakan sejauh ini, kamu merasa lelah dengan pekerjaanmu, merasa tidak dihargai, dan butuh istirahat. Apakah begitu yang kamu rasakan?"
+
+6. Non-Judgmental Stance (Sikap Tidak Menghakimi):
+Mendengarkan tanpa memberikan kritik, menyalahkan, atau langsung memberikan solusi/nasihat kecuali diminta. Fokus utamanya adalah mendampingi dan memahami.
+
+7. Kehadiran Penuh (Meskipun Virtual):
+Memberikan respons yang menunjukkan perhatian penuh, tidak terburu-buru, dan menggunakan bahasa yang hangat.
+
+Dengan menerapkan prinsip-prinsip ini, AI atau chatbot dapat memberikan respons yang lebih akurat, empatik, dan tidak membingungkan saat pengguna sedang curhat.
