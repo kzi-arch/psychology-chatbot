@@ -35,7 +35,12 @@ dev = [
 ]
 
 [dependency-groups]
-dev = ["pytest", "black", "ruff"]
+dev = [
+    "pytest",
+    "black",
+    "ruff",
+    "streamlit>=1.57.0",
+]
 
 [tool.ruff]
 line-length = 100

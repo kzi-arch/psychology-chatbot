@@ -2469,6 +2469,7 @@ dev = [
     { name = "black" },
     { name = "pytest" },
     { name = "ruff" },
+    { name = "streamlit" },
 ]
 
 [package.metadata]
@@ -2501,6 +2502,7 @@ dev = [
     { name = "black" },
     { name = "pytest" },
     { name = "ruff" },
+    { name = "streamlit", specifier = ">=1.57.0" },
 ]
 
 [[package]]

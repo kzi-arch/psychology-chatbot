@@ -1,3 +1,18 @@
+import sys
+from pathlib import Path
+
+# Gunakan pysqlite3 untuk mengatasi masalah versi SQLite pada ChromaDB
+try:
+    __import__('pysqlite3')
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
+
+# Tambahkan direktori utama proyek ke sys.path agar Python mengenali modul 'src'
+root_dir = str(Path(__file__).resolve().parent.parent)
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
+
 import streamlit as st
 from src.core.chatbot import PsychologyChatbot
 from src.config.settings import settings

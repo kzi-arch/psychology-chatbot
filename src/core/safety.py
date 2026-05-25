@@ -14,6 +14,13 @@ class SafetyGuard:
             r"diagnosis", r"gejala", r"penyakit apa", r"apa yang salah dengan saya"
         ]
 
+        self.bypass_keywords = [
+            r"abaikan semua instruksi", r"lupakan aturan", r"ignore previous instructions",
+            r"sekarang kamu adalah", r"act as", r"developer mode", r"jailbreak",
+            r"system prompt", r"lupakan instruksi", r"tanpa filter", r"bertindaklah sebagai",
+            r"bayangkan kamu", r"skenario hipotesis", r"roleplay sebagai", r"simulasikan"
+        ]
+
     def check_crisis(self, message: str) -> Tuple[bool, str]:
         """Deteksi situasi krisis"""
         msg_lower = message.lower()
@@ -44,6 +51,19 @@ class SafetyGuard:
         
         return False, ""
 
+    def check_bypass_attempt(self, message: str) -> Tuple[bool, str]:
+        """Deteksi percobaan manipulasi prompt atau jailbreak"""
+        msg_lower = message.lower()
+        
+        for pattern in self.bypass_keywords:
+            if re.search(pattern, msg_lower):
+                return True, (
+                    "Maaf, aku tidak bisa memproses permintaan dengan format tersebut. "
+                    "Mari kita kembali fokus membicarakan perasaanmu atau hal lain yang ingin kamu curhatkan ya."
+                )
+        
+        return False, ""
+
     def validate_response(self, user_message: str, bot_response: str) -> Tuple[bool, str]:
         """Validasi tambahan pada jawaban bot"""
         forbidden_phrases = ["kamu mengalami", "kamu menderita", "diagnosisnya adalah"]
@@ -63,5 +83,9 @@ class SafetyGuard:
         is_diagnosis, diagnosis_msg = self.check_diagnosis_request(user_message)
         if is_diagnosis:
             return False, diagnosis_msg
+
+        is_bypass, bypass_msg = self.check_bypass_attempt(user_message)
+        if is_bypass:
+            return False, bypass_msg
 
         return True, ""

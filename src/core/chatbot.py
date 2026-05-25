@@ -45,8 +45,12 @@ class PsychologyChatbot:
             return safety_message
 
         # RAG Retrieval
-        retrieved_docs = self.knowledge_base.retrieve(user_message, k=settings.RAG_K)
-        context = "\n\n---\n\n".join(retrieved_docs) if retrieved_docs else ""
+        try:
+            retrieved_docs = self.knowledge_base.retrieve(user_message, k=settings.RAG_K)
+            context = "\n\n---\n\n".join(retrieved_docs) if retrieved_docs else ""
+        except Exception as e:
+            self.logger.log_error(e, context="rag_retrieval")
+            context = ""
 
         # Persona Prompt
         persona_info = PERSONAS[self.current_persona]
