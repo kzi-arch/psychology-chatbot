@@ -77,6 +77,39 @@ st.markdown("""
         border-color: #3E4148 !important;
         border-radius: 8px !important;
     }
+
+    /* --- UI Chat Bubbles Modern --- */
+    [data-testid="stChatMessage"] {
+        background-color: #1E2127;
+        border-radius: 16px;
+        padding: 1.2rem;
+        border: 1px solid #2B2D31;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1rem;
+    }
+
+    /* --- RESPONSIVE DESIGN (Mobile) --- */
+    @media screen and (max-width: 768px) {
+        h1 { font-size: 1.6rem !important; margin-top: -1rem !important; }
+        p { font-size: 0.95rem !important; }
+        
+        /* Perkecil padding bubble chat di HP */
+        [data-testid="stChatMessage"] {
+            padding: 0.8rem;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Atur jarak container utama agar tidak terlalu memakan layar */
+        .block-container {
+            padding-top: 2rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        /* Pastikan target sentuh (tap) optimal di mobile */
+        .stButton > button { min-height: 44px; }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -115,25 +148,30 @@ with st.sidebar:
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("💾 Simpan Chat", use_container_width=True):
-            if st.session_state.messages:
-                title = st.text_input("Judul:", f"Curhat {datetime.now().strftime('%d %B')}")
-                if st.button("Simpan"):
+        with st.popover("💾 Simpan", use_container_width=True):
+            if not st.session_state.messages:
+                st.info("Belum ada chat.")
+            else:
+                title = st.text_input("Judul Chat:", f"Curhat {datetime.now().strftime('%d %B')}")
+                if st.button("Simpan ke History", type="primary", use_container_width=True):
                     st.session_state.chat_storage.save_chat(st.session_state.messages, title)
                     st.success("Tersimpan!")
 
     with col2:
-        if st.button("📤 Export TXT", use_container_width=True):
-            if st.session_state.messages:
-                txt_content = "\n\n".join([f"{'👤 Kamu' if m['role']=='user' else '🧠 EmpathAI'}: {m['content']}" 
-                                        for m in st.session_state.messages])
-                st.download_button("Download", txt_content, f"empathai_{datetime.now().strftime('%Y%m%d')}.txt")
+        if st.session_state.messages:
+            txt_content = "\n\n".join([f"{'👤 Kamu' if m['role']=='user' else '🧠 EmpathAI'}: {m['content']}" 
+                                    for m in st.session_state.messages])
+            st.download_button("📤 Export", txt_content, f"empathai_{datetime.now().strftime('%Y%m%d')}.txt", use_container_width=True)
+        else:
+            st.button("📤 Export", disabled=True, use_container_width=True)
 
     st.divider()
-    if st.button("🗑️ Hapus Riwayat", type="secondary"):
-        st.session_state.messages = []
-        st.session_state.chatbot.clear_history()
-        st.success("Riwayat dibersihkan.")
+    with st.popover("🗑️ Hapus Riwayat", use_container_width=True):
+        st.write("Yakin ingin menghapus semua percakapan ini?")
+        if st.button("Ya, Hapus!", type="primary", use_container_width=True):
+            st.session_state.messages = []
+            st.session_state.chatbot.clear_history()
+            st.rerun()
 
 # ====================== MAIN CHAT ======================
 st.markdown("<h1 style='text-align: center; color: #FF4B4B; padding-top: 1rem;'>💬 EmpathAI</h1>", unsafe_allow_html=True)
