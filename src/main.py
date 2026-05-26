@@ -36,7 +36,7 @@ st.markdown("""
     /* Sembunyikan Header/Footer Streamlit Bawaan */
     #MainMenu {visibility: hidden;} 
     footer {visibility: hidden;} 
-    header {visibility: hidden;}
+    header {background-color: transparent !important;}
 
     /* Styling Tombol Elegan */
     .stButton > button { 
