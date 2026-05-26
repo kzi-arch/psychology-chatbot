@@ -39,23 +39,43 @@ st.markdown("""
     header {visibility: hidden;}
 
     /* Styling Tombol Elegan */
-    .stButton button { 
-        border-radius: 20px; 
-        border: 1px solid #333;
-        background-color: #1E2127;
-        color: #FAFAFA;
-        transition: all 0.3s ease;
+    .stButton > button { 
+        border-radius: 12px !important; 
+        border: 1px solid #3E4148 !important;
+        background-color: #1B1E23 !important;
+        color: #FAFAFA !important;
+        font-weight: 600 !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        padding: 0.5rem 1rem !important;
     }
-    .stButton button:hover {
-        border-color: #FF4B4B;
-        color: #FF4B4B;
-        box-shadow: 0 4px 10px rgba(255, 75, 75, 0.15);
+    .stButton > button:hover {
+        border-color: #FF4B4B !important;
+        color: #FF4B4B !important;
+        background-color: rgba(255, 75, 75, 0.05) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(255, 75, 75, 0.15) !important;
+    }
+    .stButton > button:active {
+        transform: translateY(0);
     }
 
     /* Memperhalus Sidebar */
     [data-testid="stSidebar"] {
-        background-color: #13151A;
-        border-right: 1px solid #2E3036;
+        background-color: #111317 !important;
+        border-right: 1px solid #2B2D31 !important;
+    }
+    
+    [data-testid="stSidebar"] hr {
+        border-color: #2B2D31;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Style khusus Selectbox di Sidebar */
+    div[data-baseweb="select"] > div {
+        background-color: #1B1E23 !important;
+        border-color: #3E4148 !important;
+        border-radius: 8px !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -72,8 +92,12 @@ if "chat_storage" not in st.session_state:
 
 # ====================== SIDEBAR ======================
 with st.sidebar:
-    st.title("🧠 EmpathAI")
-    st.caption("Teman Curhat Psikologi")
+    st.markdown("""
+    <div style='text-align: center; margin-bottom: 10px;'>
+        <h2 style='margin-bottom: 0; color: #FF4B4B; font-weight: 700; letter-spacing: 1px;'>🧠 EmpathAI</h2>
+        <p style='color: #8B949E; font-size: 0.9em; margin-top: 5px;'>Teman Curhat Psikologi</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.divider()
 
