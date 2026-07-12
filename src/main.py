@@ -197,8 +197,8 @@ if prompt := st.chat_input("Ketik pesanmu di sini..."):
         st.markdown(prompt)
 
     with st.chat_message("assistant", avatar="🧠"):
+        # Menggunakan st.write_stream untuk efek mengetik real-time yang jauh lebih responsif
         with st.spinner("EmpathAI sedang mendengarkan..."):
-            response = st.session_state.chatbot.get_response(prompt)
-            st.markdown(response)
+            response = st.write_stream(st.session_state.chatbot.get_response_stream(prompt))
     
     st.session_state.messages.append({"role": "assistant", "content": response})

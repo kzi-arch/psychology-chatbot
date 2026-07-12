@@ -33,16 +33,16 @@ class PsychologyChatbot:
         self.history = []
         self.memory.summary = ""
 
-    def get_response(self, user_message: str, user_id: str = "default") -> str:
+    def get_response_stream(self, user_message: str, user_id: str = "default"):
         # Rate Limiting Check
         can_proceed, limit_message = self.rate_limiter.can_make_request(user_id)
         if not can_proceed:
-            return limit_message
+            yield limit_message; return
 
         # Safety Check
         is_safe, safety_message = self.safety.get_safety_response(user_message)
         if not is_safe:
-            return safety_message
+            yield safety_message; return
 
         # RAG Retrieval
         try:
@@ -84,7 +84,7 @@ Pastikan gaya bahasa, nada bicara, dan pendekatanmu BENAR-BENAR mencerminkan per
                 }
             )
 
-            response = self.client.models.generate_content(
+            response_stream = self.client.models.generate_content_stream(
                 model=settings.GEMINI_MODEL,
                 contents=self.history,
                 config=types.GenerateContentConfig(
@@ -94,14 +94,17 @@ Pastikan gaya bahasa, nada bicara, dan pendekatanmu BENAR-BENAR mencerminkan per
                 )
             )
 
-            bot_reply = response.text.strip()
-            self.history.append({"role": "model", "parts": [{"text": bot_reply}]})
+            full_reply = ""
+            for chunk in response_stream:
+                if chunk.text:
+                    full_reply += chunk.text
+                    yield chunk.text
+
+            self.history.append({"role": "model", "parts": [{"text": full_reply.strip()}]})
 
             if len(self.history) > 10:
                 self.memory.summarize_conversation(self.history)
 
-            return bot_reply
-
         except Exception as e:
             self.logger.log_error(e, context="generate_content")
-            return "Maaf, sedang ada gangguan. Coba lagi sebentar ya."
+            yield "Maaf, sedang ada gangguan. Coba lagi sebentar ya."
